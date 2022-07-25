@@ -16,7 +16,7 @@ export default class Form extends Component {
             Nome:
             <input
               type="text"
-              name="nome"
+              name="cardName"
               id="nome"
               data-testid="name-input"
               placeholder="Digite o nome da Carta"
@@ -27,7 +27,7 @@ export default class Form extends Component {
           <label htmlFor="descricao">
             Descrição:
             <textarea
-              name="descricao"
+              name="cardDescription"
               id="descricao"
               data-testid="description-input"
               cols="30"
@@ -38,10 +38,12 @@ export default class Form extends Component {
             />
           </label>
           <label htmlFor="atributo1">
+            <br />
+            <br />
             Atributo 1:
             <input
               type="number"
-              name="atributo1"
+              name="cardAttr1"
               id="atributo1"
               data-testid="attr1-input"
               placeholder="0-90"
@@ -53,7 +55,7 @@ export default class Form extends Component {
             Atributo 2:
             <input
               type="number"
-              name="atributo2"
+              name="cardAttr2"
               id="atributo2"
               data-testid="attr2-input"
               placeholder="0-90"
@@ -65,7 +67,7 @@ export default class Form extends Component {
             Atributo 3:
             <input
               type="number"
-              name="atributo3"
+              name="cardAttr3"
               id="atributo3"
               data-testid="attr3-input"
               placeholder="0-90"
@@ -77,7 +79,7 @@ export default class Form extends Component {
             Caminho da Imagem:
             <input
               type="text"
-              name="img"
+              name="cardImage"
               id="img"
               data-testid="image-input"
               value={ cardImage }
@@ -87,12 +89,13 @@ export default class Form extends Component {
           <label htmlFor="raridade">
             Raridade:
             <select
-              name="raridade"
+              name="cardRare"
               id="raridade"
               data-testid="rare-input"
               value={ cardRare }
               onChange={ onInputChange }
             >
+              <option value="" selected disabled hidden>Escolha...</option>
               <option value="normal">normal</option>
               <option value="raro">raro</option>
               <option value="muito raro">muito raro</option>
@@ -102,7 +105,7 @@ export default class Form extends Component {
             Super Trunfo:
             <input
               type="checkbox"
-              name="super-trunfo"
+              name="cardTrunfo"
               id="super-trunfo"
               data-testid="trunfo-input"
               checked={ cardTrunfo }
@@ -126,9 +129,9 @@ export default class Form extends Component {
 Form.propTypes = {
   cardName: PropTypes.string.isRequired,
   cardDescription: PropTypes.string.isRequired,
-  cardAttr1: PropTypes.string.isRequired,
-  cardAttr2: PropTypes.string.isRequired,
-  cardAttr3: PropTypes.string.isRequired,
+  cardAttr1: PropTypes.number.isRequired,
+  cardAttr2: PropTypes.number.isRequired,
+  cardAttr3: PropTypes.number.isRequired,
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
