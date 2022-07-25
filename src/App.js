@@ -10,7 +10,7 @@ const INITIAL_STATE = {
   cardAttr2: '',
   cardAttr3: '',
   cardImage: '',
-  cardRare: '',
+  cardRare: 'normal',
   cardTrunfo: false,
   hasTrunfo: false,
   isSaveButtonDisabled: false,
@@ -25,16 +25,16 @@ class App extends React.Component {
   onInputChange = ({ target }) => {
     const { name, value, type, checked } = target;
     const verifica = type === 'checkbox' ? checked : value;
-    console.log(verifica);
-    console.log(name, value, type, checked);
+    // console.log(verifica);
+    // console.log(name, value, type, checked);
     this.setState({
       [name]: verifica,
     });
   };
 
   render() {
-    const tudo = { ...this.state };
-    console.log(tudo);
+    // const tudo = { ...this.state };
+    // console.log(tudo);
     return (
       <div>
         <h1>Tryunfo</h1>
