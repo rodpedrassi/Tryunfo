@@ -1,9 +1,9 @@
 input {
-  margin-bottom: 12px;
   display: block;
+  margin-bottom: 12px;
   padding: 4px;
 }
 
-#super-trunfo {
+.s-trunfo {
   display: inline;
 }

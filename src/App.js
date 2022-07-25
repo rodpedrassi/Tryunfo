@@ -1,4 +1,5 @@
 import React from 'react';
+import Card from './components/Card';
 import Form from './components/Form';
 import './styles/global.css';
 
@@ -38,6 +39,7 @@ class App extends React.Component {
       <div>
         <h1>Tryunfo</h1>
         <Form { ...this.state } onInputChange={ this.onInputChange } />
+        <Card { ...this.state } />
       </div>
     );
   }
