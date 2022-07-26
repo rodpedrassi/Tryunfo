@@ -6,14 +6,15 @@ import './styles/global.css';
 const INITIAL_STATE = {
   cardName: '',
   cardDescription: '',
-  cardAttr1: '',
-  cardAttr2: '',
-  cardAttr3: '',
+  cardAttr1: 0,
+  cardAttr2: 0,
+  cardAttr3: 0,
   cardImage: '',
   cardRare: 'normal',
   cardTrunfo: false,
   hasTrunfo: false,
   isSaveButtonDisabled: true,
+  savedCards: [],
 };
 
 class App extends React.Component {
@@ -24,11 +25,11 @@ class App extends React.Component {
 
   onInputChange = ({ target }) => {
     const { name, value, type, checked } = target;
-    const verifica = type === 'checkbox' ? checked : value;
+    const verify = type === 'checkbox' ? checked : value;
     // console.log(verifica);
     // console.log(name, value, type, checked);
     this.setState({
-      [name]: verifica,
+      [name]: verify,
     }, () => {
       this.validateFields();
     });
@@ -52,7 +53,7 @@ class App extends React.Component {
                           || cardImage === '' || cardRare === '';
     // console.log('campos vazio?', verifyEmptyFields);
     const checkRules = verifyAttr || verifyNegativeAttr
-                                  || verifySumAttr || verifyEmptyFields;
+                       || verifySumAttr || verifyEmptyFields;
     // console.log('botao disabled?', checkRules);
     this.setState({
       isSaveButtonDisabled: checkRules,
@@ -61,7 +62,31 @@ class App extends React.Component {
 
   onSaveButtonClick = (e) => {
     e.preventDefault();
-    console.log(this.validateFields());
+    const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
+      cardImage, cardRare, savedCards } = this.state;
+    const card = {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      savedCards,
+    };
+    this.setState((prevState) => ({
+      savedCards: [...prevState.savedCards, card],
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: 0,
+      cardAttr2: 0,
+      cardAttr3: 0,
+      cardImage: '',
+      cardRare: 'normal',
+      cardTrunfo: false,
+      hasTrunfo: false,
+      isSaveButtonDisabled: true,
+    }));
   };
 
   render() {
