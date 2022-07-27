@@ -94,6 +94,15 @@ class App extends React.Component {
     }));
   };
 
+  onDeleteCard = (carta) => {
+    const { savedCards } = this.state;
+    const newSavedCards = savedCards.filter((card) => card.cardName !== carta.cardName);
+    this.setState({
+      savedCards: newSavedCards,
+      hasTrunfo: (carta.hasTrunfo),
+    });
+  };
+
   render() {
     // const tudo = { ...this.state };
     // console.log(tudo);
@@ -107,7 +116,22 @@ class App extends React.Component {
           onSaveButtonClick={ this.onSaveButtonClick }
         />
         <Card { ...this.state } />
-        { savedCards.map((carta) => <Card key={ carta.name } { ...carta } />)}
+        {/* { savedCards.map((carta) => <Card key={ carta.name } { ...carta } />)} */}
+        {
+          savedCards.map((carta, index) => (
+            <div key={ index }>
+              <Card key={ index } { ...carta } />
+              <button
+                key={ index }
+                data-testid="delete-button"
+                type="submit"
+                onClick={ () => this.onDeleteCard(carta) }
+              >
+                Excluir
+              </button>
+            </div>
+          ))
+        }
       </div>
     );
   }
