@@ -3,11 +3,20 @@ import PropTypes from 'prop-types';
 
 export default class Form extends Component {
   render() {
-    const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
-      cardImage, cardRare, cardTrunfo, hasTrunfo, isSaveButtonDisabled,
-      onSaveButtonClick, onInputChange } = this.props;
-
-    console.log(hasTrunfo);
+    const {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+      hasTrunfo,
+      isSaveButtonDisabled,
+      onSaveButtonClick,
+      onInputChange,
+    } = this.props;
 
     return (
       <section>
@@ -103,15 +112,19 @@ export default class Form extends Component {
           </label>
           <label htmlFor="super-trunfo">
             Super Trunfo:
-            <input
-              type="checkbox"
-              name="cardTrunfo"
-              id="super-trunfo"
-              className="s-trunfo"
-              data-testid="trunfo-input"
-              checked={ cardTrunfo }
-              onChange={ onInputChange }
-            />
+            {hasTrunfo ? (
+              <span>Você já tem um Super Trunfo em seu baralho</span>
+            ) : (
+              <input
+                type="checkbox"
+                name="cardTrunfo"
+                id="super-trunfo"
+                className="s-trunfo"
+                data-testid="trunfo-input"
+                checked={ cardTrunfo }
+                onChange={ onInputChange }
+              />
+            )}
           </label>
           <button
             type="submit"

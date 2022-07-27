@@ -6,9 +6,9 @@ import './styles/global.css';
 const INITIAL_STATE = {
   cardName: '',
   cardDescription: '',
-  cardAttr1: 0,
-  cardAttr2: 0,
-  cardAttr3: 0,
+  cardAttr1: '0',
+  cardAttr2: '0',
+  cardAttr3: '0',
   cardImage: '',
   cardRare: 'normal',
   cardTrunfo: false,
@@ -63,7 +63,7 @@ class App extends React.Component {
   onSaveButtonClick = (e) => {
     e.preventDefault();
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
-      cardImage, cardRare, savedCards } = this.state;
+      cardImage, cardRare, savedCards, hasTrunfo, cardTrunfo } = this.state;
     const card = {
       cardName,
       cardDescription,
@@ -72,19 +72,24 @@ class App extends React.Component {
       cardAttr3,
       cardImage,
       cardRare,
+      cardTrunfo,
       savedCards,
     };
+    const checkTrunfo = cardTrunfo || hasTrunfo;
+    // const checkTrunfoSavedCard = savedCards.some((carta) => carta.cardTrunfo === true);
+
     this.setState((prevState) => ({
       savedCards: [...prevState.savedCards, card],
       cardName: '',
       cardDescription: '',
-      cardAttr1: 0,
-      cardAttr2: 0,
-      cardAttr3: 0,
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
       cardImage: '',
       cardRare: 'normal',
       cardTrunfo: false,
-      hasTrunfo: false,
+      // hasTrunfo: (checkTrunfo || checkTrunfoSavedCard),
+      hasTrunfo: checkTrunfo,
       isSaveButtonDisabled: true,
     }));
   };
@@ -92,6 +97,7 @@ class App extends React.Component {
   render() {
     // const tudo = { ...this.state };
     // console.log(tudo);
+    const { savedCards } = this.state;
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -101,6 +107,7 @@ class App extends React.Component {
           onSaveButtonClick={ this.onSaveButtonClick }
         />
         <Card { ...this.state } />
+        { savedCards.map((carta) => <Card { ...carta } />)}
       </div>
     );
   }
